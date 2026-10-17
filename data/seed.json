@@ -1,0 +1,47 @@
+{
+  "products": [
+    { "id": "trailhead-boot", "name": "Trailhead Waterproof Hiking Boot", "category": "Footwear", "price": 189, "color": "#8a5a3b", "icon": "boot", "sizes": ["8", "8.5", "9", "9.5", "10", "10.5", "11", "9 Wide", "9.5 Wide", "10 Wide", "10.5 Wide"], "blurb": "Full-grain leather, Vibram outsole, available in Wide." },
+    { "id": "ridgeline-shell", "name": "Ridgeline 3L Rain Shell", "category": "Jackets", "price": 249, "color": "#2f6f8f", "icon": "jacket", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "blurb": "Three-layer waterproof shell with pit zips." },
+    { "id": "summit-down", "name": "Summit 800 Down Jacket", "category": "Jackets", "price": 299, "color": "#b0413e", "icon": "jacket", "sizes": ["XS", "S", "M", "L", "XL"], "blurb": "800-fill responsibly sourced down, packs into its pocket." },
+    { "id": "basecamp-65", "name": "Basecamp 65L Backpack", "category": "Packs", "price": 229, "color": "#4f6b3a", "icon": "pack", "sizes": ["S/M", "M/L"], "blurb": "Adjustable torso, hip-belt pockets, rain cover included." },
+    { "id": "ember-fleece", "name": "Ember Grid Fleece", "category": "Layers", "price": 89, "color": "#d08a2e", "icon": "fleece", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "blurb": "Breathable grid fleece for cool starts. Logo embroidery available." },
+    { "id": "alpine-2p", "name": "Alpine 2P Tent", "category": "Camp", "price": 389, "color": "#5b6f7c", "icon": "tent", "sizes": ["One size"], "blurb": "Freestanding 4-season tent, 2.1 kg." },
+    { "id": "carbon-poles", "name": "Carbon Trekking Poles", "category": "Gear", "price": 119, "color": "#3d3d3d", "icon": "poles", "sizes": ["One size"], "blurb": "Three-section carbon, flick-lock, 480 g/pair." },
+    { "id": "merino-base", "name": "Merino 200 Base Layer", "category": "Layers", "price": 79, "color": "#6d5a8a", "icon": "fleece", "sizes": ["XS", "S", "M", "L", "XL"], "blurb": "Odor-resistant 200 gsm merino crew." }
+  ],
+
+  "personas": [
+    { "email": "dana.whitfield@cascadeguides.com", "name": "Dana Whitfield", "company": "Cascade Adventure Guides", "role": "Head of Procurement", "demo": "Hot lead · no cart → rep queue",
+      "inquiryType": "Bulk / team order", "message": "Hi — we run guided trips across BC and Washington and need to re-outfit about 60 guides with rain shells before our spring season starts in March. Can someone walk me through team pricing and lead times?" },
+    { "email": "marcus.lee@ridgewayschool.org", "name": "Marcus Lee", "company": "Ridgeway Outdoor School", "role": "Outdoor Program Director", "demo": "Hot lead · cart items → AI draft for approval",
+      "inquiryType": "Bulk / team order", "message": "We're outfitting our instructor team for the fall semester. I've started putting boots and packs in a cart but wanted to ask whether you offer volume or education pricing before we check out." },
+    { "email": "sam.rivera@gmail.com", "name": "Sam Rivera", "company": "", "role": "", "demo": "Cold lead · cart items → nurture",
+      "inquiryType": "Product question", "message": "Do the Ember fleeces run small? Thinking about maybe getting one at some point." },
+    { "email": "jordan.kim@peakpointsoftware.com", "name": "Jordan Kim", "company": "Peak Point Software", "role": "Office Coordinator", "demo": "Warm lead · no cart → nurture",
+      "inquiryType": "Bulk / team order", "message": "We might do branded fleeces for a company offsite sometime next year, maybe 30-40 people. No budget yet, just gathering info." }
+  ],
+
+  "carts": {
+    "marcus.lee@ridgewayschool.org": [
+      { "id": "trailhead-boot", "size": "10 Wide", "qty": 12 },
+      { "id": "basecamp-65", "size": "M/L", "qty": 12 }
+    ],
+    "sam.rivera@gmail.com": [
+      { "id": "ember-fleece", "size": "M", "qty": 1 }
+    ]
+  },
+
+  "freeEmailDomains": ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "icloud.com", "proton.me"],
+
+  "companies": {
+    "cascadeguides.com": { "name": "Cascade Adventure Guides", "industry": "Guided outdoor tourism", "employees": 240, "hq": "Squamish, BC", "description": "Runs guided hiking, climbing and backcountry ski trips across BC and Washington; ~60 seasonal field guides.", "estAnnualGearSpend": "$150K–$250K", "existingCustomer": false, "priorOrders": 0 },
+    "ridgewayschool.org": { "name": "Ridgeway Outdoor School", "industry": "Outdoor education", "employees": 85, "hq": "Bend, OR", "description": "Semester-based outdoor leadership school; ~600 students a year, 30 field instructors.", "estAnnualGearSpend": "$80K–$120K", "existingCustomer": true, "priorOrders": 2 },
+    "peakpointsoftware.com": { "name": "Peak Point Software", "industry": "B2B software", "employees": 45, "hq": "Kitchener, ON", "description": "Early-stage SaaS company. No outdoor programs.", "estAnnualGearSpend": "Under $5K", "existingCustomer": false, "priorOrders": 0 }
+  },
+
+  "people": {
+    "dana.whitfield@cascadeguides.com": { "title": "Head of Procurement", "seniority": "Director", "buyingAuthority": "Signs off on equipment purchases" },
+    "marcus.lee@ridgewayschool.org": { "title": "Outdoor Program Director", "seniority": "Director", "buyingAuthority": "Owns the program equipment budget" },
+    "jordan.kim@peakpointsoftware.com": { "title": "Office Coordinator", "seniority": "Individual contributor", "buyingAuthority": "Needs approval from leadership" }
+  }
+}

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northfield Outfitters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<script src="/icons.js"></script>
+</head>
+<body>
+
+<div class="demo-strip">
+  <div class="wrap">
+    <b>Workshop demo</b>
+    <span>Shopping as
+      <select id="persona"></select>
+    </span>
+    <span class="hint" id="personaHint"></span>
+    <span class="spacer"></span>
+    <a href="/rep" target="_blank">Open rep console ↗</a>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/">
+      <svg width="34" height="34" viewBox="0 0 40 40"><rect width="40" height="40" rx="10" fill="#234a3a"/><path d="M6 30l10-15 6 8 4-5 8 12z" fill="#f6f3ec"/><circle cx="29" cy="12" r="3" fill="#c8642c"/></svg>
+      <span>NORTHFIELD<small>OUTFITTERS</small></span>
+    </a>
+    <nav class="nav">
+      <a href="#shop">Shop</a>
+      <a href="#shop">Footwear</a>
+      <a href="#shop">Jackets</a>
+      <a href="#team">Team &amp; bulk orders</a>
+      <a href="#team">Help</a>
+    </nav>
+    <span class="spacer"></span>
+    <button class="btn cart-btn" id="openCart">Cart <span class="count" id="cartCount">0</span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>Built for the long way round.</h1>
+    <p>Boots, shells and packs for people who spend real time outside — and team pricing for the guides, schools and crews who outfit them.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn primary" href="#shop">Shop the collection</a>
+      <a class="btn" href="#team">Outfitting a team?</a>
+    </div>
+  </div>
+  <div class="hero-art">
+    <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
+      <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3d9b5"/><stop offset="1" stop-color="#e9a97a"/></linearGradient></defs>
+      <rect width="800" height="500" fill="url(#sky)"/>
+      <circle cx="590" cy="150" r="54" fill="#fbeedc"/>
+      <path d="M0 330 L150 190 L240 270 L360 140 L500 290 L610 210 L800 340 V500 H0z" fill="#6b8a7a"/>
+      <path d="M0 380 L120 300 L260 360 L420 260 L560 350 L700 300 L800 350 V500 H0z" fill="#3f6656"/>
+      <path d="M0 430 L200 380 L380 420 L560 380 L800 420 V500 H0z" fill="#234a3a"/>
+      <path d="M360 140 L385 170 L372 168 L360 185 L348 168 L336 172z" fill="#fbeedc"/>
+    </svg>
+  </div>
+</section>
+
+<section class="section" id="shop">
+  <div class="section-head">
+    <div><h2>Field-tested bestsellers</h2><p>Free shipping over $150 · 30-day returns on unworn gear</p></div>
+  </div>
+  <div class="grid" id="products"></div>
+</section>
+
+<section class="section" id="team">
+  <div class="contact">
+    <div>
+      <h2>Outfitting a team, school or crew?</h2>
+      <p>Tell us what you're planning. Our team-sales desk replies within one business day with pricing, lead times and sizing help.</p>
+      <ul>
+        <li>Volume pricing from 10 units</li>
+        <li>Logo embroidery on fleece and shells</li>
+        <li>Size-run kits for fitting days</li>
+      </ul>
+      <div class="persona-fill" id="personaFill"></div>
+    </div>
+    <form class="form" id="inquiryForm" autocomplete="off">
+      <div class="two">
+        <div class="field"><label for="f-name">Name</label><input class="input" id="f-name" required></div>
+        <div class="field"><label for="f-email">Work email</label><input class="input" id="f-email" type="email" required></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="f-company">Company / organization</label><input class="input" id="f-company"></div>
+        <div class="field"><label for="f-role">Role</label><input class="input" id="f-role"></div>
+      </div>
+      <div class="field"><label for="f-type">What's this about?</label>
+        <select class="input" id="f-type">
+          <option>Bulk / team order</option>
+          <option>Product question</option>
+          <option>Request a demo / fitting day</option>
+          <option>Order support</option>
+        </select>
+      </div>
+      <div class="field"><label for="f-message">Message</label><textarea class="input" id="f-message" required></textarea></div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <button class="btn accent" type="submit" id="submitBtn">Send inquiry</button>
+        <span id="formStatus" style="font-size:13px;color:var(--muted)"></span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="site">Northfield Outfitters is a fictional company used for the MBET AI &amp; LLMs workshop.</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="cart" aria-label="Cart">
+  <header><h3 style="flex:1">Your cart</h3><button class="x" id="closeCart" aria-label="Close">×</button></header>
+  <div class="content" id="cartLines"></div>
+  <footer>
+    <div style="display:flex;justify-content:space-between;font-weight:600;margin-bottom:12px"><span>Subtotal</span><span id="cartTotal">$0</span></div>
+    <div style="display:flex;gap:8px">
+      <button class="btn primary" style="flex:1;justify-content:center" id="checkout">Checkout</button>
+      <button class="btn" id="clearCart">Clear</button>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin:10px 0 0">Carts are saved to your account, so our team-sales desk can see what you're looking at.</p>
+  </footer>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script src="/store.js"></script>
+</body>
+</html>

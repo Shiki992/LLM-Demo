@@ -1,0 +1,514 @@
+{
+  "id": "nfLeadQualify001",
+  "name": "Northfield · Lead qualifier + cart check",
+  "nodes": [
+    {
+      "id": "Note: trigger",
+      "name": "Note: trigger",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        -80
+      ],
+      "parameters": {
+        "content": "## 1 · Trigger\nA new inquiry arrives from the storefront form.",
+        "width": 260,
+        "height": 380,
+        "color": 7
+      }
+    },
+    {
+      "id": "Note: research",
+      "name": "Note: research",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        180,
+        -80
+      ],
+      "parameters": {
+        "content": "## 2 · AI research & score\nLook up the company, then ask the model: hot, warm or cold?",
+        "width": 700,
+        "height": 560,
+        "color": 5
+      }
+    },
+    {
+      "id": "Note: cart",
+      "name": "Note: cart",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        920,
+        -80
+      ],
+      "parameters": {
+        "content": "## 3 · Cart check\nA real lookup in the store — not an AI guess.",
+        "width": 260,
+        "height": 380,
+        "color": 4
+      }
+    },
+    {
+      "id": "Note: route",
+      "name": "Note: route",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        -200
+      ],
+      "parameters": {
+        "content": "## 4 · Route on both signals\nScore + cart decide the outcome.",
+        "width": 940,
+        "height": 820,
+        "color": 6
+      }
+    },
+    {
+      "id": "webhook",
+      "name": "New inquiry",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -60,
+        100
+      ],
+      "webhookId": "6c1f7c0e-1f5a-4f5e-9d49-0b5f1f2a9e11",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "northfield-inquiry",
+        "responseMode": "onReceived",
+        "options": {}
+      }
+    },
+    {
+      "id": "enrich",
+      "name": "Look up company",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        100
+      ],
+      "parameters": {
+        "url": "={{ $json.body.callbackBase }}/api/enrich",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "email",
+              "value": "={{ $json.body.email }}"
+            },
+            {
+              "name": "ticketId",
+              "value": "={{ $json.body.ticketId }}"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "score",
+      "name": "AI · Research & score",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        480,
+        100
+      ],
+      "parameters": {
+        "promptType": "define",
+        "text": "=INQUIRY\nName: {{ $('New inquiry').item.json.body.name }}\nEmail: {{ $('New inquiry').item.json.body.email }}\nCompany (self-reported): {{ $('New inquiry').item.json.body.company || 'not given' }}\nRole (self-reported): {{ $('New inquiry').item.json.body.role || 'not given' }}\nInquiry type: {{ $('New inquiry').item.json.body.inquiryType }}\nMessage: {{ $('New inquiry').item.json.body.message }}\n\nCOMPANY LOOKUP (from our directory)\n{{ JSON.stringify($json, null, 2) }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "You are a B2B lead-qualification analyst for Northfield Outfitters, an outdoor gear retailer with a team-sales desk (volume pricing from 10 units).\n\nScore each inbound inquiry HOT, WARM or COLD using ONLY the inquiry and the company lookup provided. Never invent facts about the company or person.\n\nHOT  = an organization with a concrete, near-term need (roughly within 3 months) for 10+ units, AND the contact has buying authority or a clear budget.\nWARM = a plausible organizational fit, but vague timing, no budget yet, or the contact lacks authority.\nCOLD = an individual shopper or personal email, a single-unit purchase, or no business fit.\n\nRespond with ONLY a JSON object, no markdown fences:\n{\"score\":\"hot|warm|cold\",\"confidence\":0.0-1.0,\"summary\":\"Two sentences a rep can read in ten seconds.\",\"reasons\":[\"3 short reasons, each citing a specific fact from the inquiry or lookup\"],\"nextStep\":\"One short recommended action for the sales team.\"}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "model1",
+      "name": "Claude (scoring)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        480,
+        320
+      ],
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "claude-sonnet-5"
+        },
+        "options": {
+          "temperature": 0.2,
+          "maxTokensToSample": 1024
+        }
+      }
+    },
+    {
+      "id": "parse",
+      "name": "Parse score",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        100
+      ],
+      "parameters": {
+        "jsCode": "// The AI replied with text; turn it into fields the Switch can branch on.\nconst raw = $input.first().json.text ?? '';\nlet r;\ntry {\n  r = JSON.parse((raw.match(/\\{[\\s\\S]*\\}/) || [raw])[0]);\n} catch (e) {\n  r = { score: 'warm', summary: 'AI output could not be parsed - review manually.', reasons: [raw.slice(0, 200)] };\n}\nconst lead = $('New inquiry').first().json.body;\nreturn [{\n  json: {\n    ...lead,\n    score: String(r.score || 'warm').toLowerCase(),\n    confidence: r.confidence ?? null,\n    summary: r.summary || '',\n    reasons: r.reasons || [],\n    nextStep: r.nextStep || '',\n  },\n}];"
+      }
+    },
+    {
+      "id": "cart",
+      "name": "Check cart",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        980,
+        100
+      ],
+      "parameters": {
+        "url": "={{ $json.callbackBase }}/api/cart/lookup",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "email",
+              "value": "={{ $json.email }}"
+            },
+            {
+              "name": "ticketId",
+              "value": "={{ $json.ticketId }}"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "switch",
+      "name": "Hot? Cart?",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1260,
+        100
+      ],
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "renameOutput": true,
+              "outputKey": "Hot + cart",
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "c1",
+                    "leftValue": "={{ $('Parse score').item.json.score }}",
+                    "rightValue": "hot",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  },
+                  {
+                    "id": "c2",
+                    "leftValue": "={{ $json.hasCart }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "renameOutput": true,
+              "outputKey": "Hot, no cart",
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "c3",
+                    "leftValue": "={{ $('Parse score').item.json.score }}",
+                    "rightValue": "hot",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "Warm or cold"
+        }
+      }
+    },
+    {
+      "id": "draft",
+      "name": "AI · Draft outreach",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        1520,
+        -60
+      ],
+      "parameters": {
+        "promptType": "define",
+        "text": "=CUSTOMER\n{{ $('Parse score').item.json.name }}, {{ $('Parse score').item.json.role || 'role unknown' }} at {{ $('Parse score').item.json.company || 'unknown company' }}\n\nTHEIR MESSAGE\n{{ $('Parse score').item.json.message }}\n\nRESEARCH SUMMARY\n{{ $('Parse score').item.json.summary }}\n\nITEMS IN THEIR CART RIGHT NOW\n{{ $('Check cart').item.json.items.map(i => '- ' + i.qty + ' x ' + i.name + ' (size ' + i.size + ') @ $' + i.price).join('\\n') }}\nCart total: ${{ $('Check cart').item.json.total }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "You write short, warm outreach emails for Northfield Outfitters' team-sales reps. A rep will review and approve every email before it is sent.\n\nRules:\n- Reference the exact items sitting in the customer's cart (product name, size and quantity).\n- Answer the question they actually asked.\n- Do NOT promise specific discounts, prices, stock levels or lead times that are not given to you. Say the rep will confirm volume pricing instead.\n- Under 150 words. Friendly, specific, no hype.\n- Sign off as: [Rep name], Team Sales, Northfield Outfitters\n\nRespond with ONLY a JSON object, no markdown fences: {\"subject\":\"...\",\"body\":\"...\"}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "model2",
+      "name": "Claude (writing)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        1520,
+        160
+      ],
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "claude-sonnet-5"
+        },
+        "options": {
+          "temperature": 0.2,
+          "maxTokensToSample": 1024
+        }
+      }
+    },
+    {
+      "id": "parseDraft",
+      "name": "Parse draft",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        -60
+      ],
+      "parameters": {
+        "jsCode": "const raw = $input.first().json.text ?? '';\nlet d;\ntry {\n  d = JSON.parse((raw.match(/\\{[\\s\\S]*\\}/) || [raw])[0]);\n} catch (e) {\n  d = { subject: 'Following up on your Northfield inquiry', body: raw };\n}\nreturn [{ json: { draft: { subject: d.subject || '', body: d.body || '' } } }];"
+      }
+    },
+    {
+      "id": "approve",
+      "name": "Send to rep for approval",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1980,
+        -60
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Parse score').item.json.callbackBase }}/api/leads/route",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  ticketId: $('Parse score').item.json.ticketId,\n  route: 'approval',\n  score: $('Parse score').item.json.score,\n  summary: $('Parse score').item.json.summary,\n  reasons: $('Parse score').item.json.reasons,\n  nextStep: $('Parse score').item.json.nextStep,\n  draft: $json.draft\n}) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "rep",
+      "name": "Route to rep queue",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1520,
+        340
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Parse score').item.json.callbackBase }}/api/leads/route",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  ticketId: $('Parse score').item.json.ticketId,\n  route: 'rep',\n  score: $('Parse score').item.json.score,\n  summary: $('Parse score').item.json.summary,\n  reasons: $('Parse score').item.json.reasons,\n  nextStep: $('Parse score').item.json.nextStep\n}) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "nurture",
+      "name": "Enroll in nurture sequence",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1520,
+        500
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Parse score').item.json.callbackBase }}/api/leads/route",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  ticketId: $('Parse score').item.json.ticketId,\n  route: 'nurture',\n  score: $('Parse score').item.json.score,\n  summary: $('Parse score').item.json.summary,\n  reasons: $('Parse score').item.json.reasons,\n  nextStep: $('Parse score').item.json.nextStep\n}) }}",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "New inquiry": {
+      "main": [
+        [
+          {
+            "node": "Look up company",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Look up company": {
+      "main": [
+        [
+          {
+            "node": "AI · Research & score",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI · Research & score": {
+      "main": [
+        [
+          {
+            "node": "Parse score",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse score": {
+      "main": [
+        [
+          {
+            "node": "Check cart",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check cart": {
+      "main": [
+        [
+          {
+            "node": "Hot? Cart?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hot? Cart?": {
+      "main": [
+        [
+          {
+            "node": "AI · Draft outreach",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Route to rep queue",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enroll in nurture sequence",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI · Draft outreach": {
+      "main": [
+        [
+          {
+            "node": "Parse draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse draft": {
+      "main": [
+        [
+          {
+            "node": "Send to rep for approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude (scoring)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI · Research & score",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude (writing)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI · Draft outreach",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "active": false
+}

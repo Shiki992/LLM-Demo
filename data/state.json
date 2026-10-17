@@ -1,0 +1,603 @@
+{
+  "nextTicket": 1049,
+  "carts": {
+    "marcus.lee@ridgewayschool.org": [
+      {
+        "id": "trailhead-boot",
+        "size": "10 Wide",
+        "qty": 12
+      },
+      {
+        "id": "basecamp-65",
+        "size": "M/L",
+        "qty": 12
+      }
+    ],
+    "sam.rivera@gmail.com": [
+      {
+        "id": "ember-fleece",
+        "size": "M",
+        "qty": 1
+      }
+    ]
+  },
+  "tickets": [
+    {
+      "id": "NF-1048",
+      "createdAt": "2026-10-06T17:22:19.297Z",
+      "name": "Marcus Lee",
+      "email": "marcus.lee@ridgewayschool.org",
+      "company": "Ridgeway Outdoor School",
+      "role": "Outdoor Program Director",
+      "inquiryType": "Bulk / team order",
+      "message": "We're outfitting our instructor team for the fall semester. I've started putting boots and packs in a cart but wanted to ask whether you offer volume or education pricing before we check out.",
+      "status": "sent",
+      "route": "approval",
+      "score": "hot",
+      "summary": "Marcus is outfitting his instructor team for the fall semester and asked about volume/education pricing, indicating a near-term need for multiple units. He is the Outdoor Program Director who owns the program equipment budget at an existing customer with ~30 field instructors, making this a hot lead.",
+      "reasons": [
+        "Inquiry: 'outfitting our instructor team for the fall semester' — explicit near-term need for group gear.",
+        "Company lookup: '30 field instructors' — organizational scale fits 10+ unit volume orders.",
+        "Person & account: title = Outdoor Program Director with 'Owns the program equipment budget' and 'existingCustomer' with 2 prior orders — authority and relationship present."
+      ],
+      "cart": {
+        "items": [
+          {
+            "id": "trailhead-boot",
+            "name": "Trailhead Waterproof Hiking Boot",
+            "category": "Footwear",
+            "price": 189,
+            "color": "#8a5a3b",
+            "icon": "boot",
+            "sizes": [
+              "8",
+              "8.5",
+              "9",
+              "9.5",
+              "10",
+              "10.5",
+              "11",
+              "9 Wide",
+              "9.5 Wide",
+              "10 Wide",
+              "10.5 Wide"
+            ],
+            "blurb": "Full-grain leather, Vibram outsole, available in Wide.",
+            "size": "10 Wide",
+            "qty": 12
+          },
+          {
+            "id": "basecamp-65",
+            "name": "Basecamp 65L Backpack",
+            "category": "Packs",
+            "price": 229,
+            "color": "#4f6b3a",
+            "icon": "pack",
+            "sizes": [
+              "S/M",
+              "M/L"
+            ],
+            "blurb": "Adjustable torso, hip-belt pockets, rain cover included.",
+            "size": "M/L",
+            "qty": 12
+          }
+        ],
+        "total": 5016
+      },
+      "draft": {
+        "subject": "Volume & education pricing for your cart",
+        "body": "Hi Marcus — we can confirm volume and education pricing for your order. I see 12 x Trailhead Waterproof Hiking Boot (size 10 Wide) and 12 x Basecamp 65L Backpack (size M/L) in your cart. I’ll review applicable pricing and education eligibility for Ridgeway Outdoor School and follow up with options and next steps. Would you like me to include any other sizes or quantities before I check?"
+      },
+      "enrichment": {
+        "found": true,
+        "domain": "ridgewayschool.org",
+        "emailType": "business",
+        "company": {
+          "name": "Ridgeway Outdoor School",
+          "industry": "Outdoor education",
+          "employees": 85,
+          "hq": "Bend, OR",
+          "description": "Semester-based outdoor leadership school; ~600 students a year, 30 field instructors.",
+          "estAnnualGearSpend": "$80K–$120K",
+          "existingCustomer": true,
+          "priorOrders": 2
+        },
+        "person": {
+          "title": "Outdoor Program Director",
+          "seniority": "Director",
+          "buyingAuthority": "Owns the program equipment budget"
+        }
+      },
+      "notes": [],
+      "timeline": [
+        {
+          "at": "2026-10-06T17:22:19.297Z",
+          "label": "Inquiry received from storefront"
+        },
+        {
+          "at": "2026-10-06T17:22:19.388Z",
+          "label": "Handed to n8n · test webhook (editor)"
+        },
+        {
+          "at": "2026-10-06T17:22:19.490Z",
+          "label": "n8n · Looked up company & role"
+        },
+        {
+          "at": "2026-10-06T17:22:27.545Z",
+          "label": "n8n · Cart check: 2 item(s), $5016"
+        },
+        {
+          "at": "2026-10-06T17:22:40.877Z",
+          "label": "n8n · Routed → AI drafted outreach, awaiting rep approval"
+        },
+        {
+          "at": "2026-10-06T17:23:13.051Z",
+          "label": "Rep approved & sent outreach email"
+        }
+      ],
+      "nextStep": "Send education/volume pricing and a tailored quote for 30+ instructor kits and offer a quick call to confirm sizes/timeline before the semester starts."
+    },
+    {
+      "id": "NF-1047",
+      "createdAt": "2026-10-06T17:20:39.668Z",
+      "name": "Jordan Kim",
+      "email": "jordan.kim@peakpointsoftware.com",
+      "company": "Peak Point Software",
+      "role": "Office Coordinator",
+      "inquiryType": "Bulk / team order",
+      "message": "We might do branded fleeces for a company offsite sometime next year, maybe 30-40 people. No budget yet, just gathering info.",
+      "status": "claimed",
+      "route": "rep",
+      "score": "warm",
+      "summary": "Warm lead: inquired about branded fleeces for 30–40 people but timing is vague ('sometime next year') and they have no budget yet. Contact is an Office Coordinator who needs leadership approval; company is small (45 employees) with estimated annual gear spend under $5K.",
+      "reasons": [
+        "Inquiry specifies '30-40 people' (meets 10+ unit threshold).",
+        "Timing is vague ('sometime next year') and the message says 'No budget yet' (inquiry).",
+        "Contact is 'Office Coordinator' and lookup shows 'Needs approval from leadership'; company has 45 employees and estAnnualGearSpend 'Under $5K' (lookup)."
+      ],
+      "cart": {
+        "items": [],
+        "total": 0
+      },
+      "draft": null,
+      "enrichment": {
+        "found": true,
+        "domain": "peakpointsoftware.com",
+        "emailType": "business",
+        "company": {
+          "name": "Peak Point Software",
+          "industry": "B2B software",
+          "employees": 45,
+          "hq": "Kitchener, ON",
+          "description": "Early-stage SaaS company. No outdoor programs.",
+          "estAnnualGearSpend": "Under $5K",
+          "existingCustomer": false,
+          "priorOrders": 0
+        },
+        "person": {
+          "title": "Office Coordinator",
+          "seniority": "Individual contributor",
+          "buyingAuthority": "Needs approval from leadership"
+        }
+      },
+      "notes": [],
+      "timeline": [
+        {
+          "at": "2026-10-06T17:20:39.668Z",
+          "label": "Inquiry received from storefront"
+        },
+        {
+          "at": "2026-10-06T17:20:39.939Z",
+          "label": "Handed to n8n · test webhook (editor)"
+        },
+        {
+          "at": "2026-10-06T17:20:40.017Z",
+          "label": "n8n · Looked up company & role"
+        },
+        {
+          "at": "2026-10-06T17:20:53.121Z",
+          "label": "n8n · Cart check: empty"
+        },
+        {
+          "at": "2026-10-06T17:20:53.174Z",
+          "label": "n8n · Routed → Nurture sequence"
+        },
+        {
+          "at": "2026-10-06T17:21:42.627Z",
+          "label": "Manually moved → rep"
+        },
+        {
+          "at": "2026-10-06T17:21:53.221Z",
+          "label": "Claimed by You"
+        }
+      ],
+      "nextStep": "Send ballpark pricing and sample/fabric options for 30–40 units, ask for the target event date and decision-maker, and set a follow-up reminder in 2–3 months.",
+      "assignee": "You"
+    },
+    {
+      "id": "NF-1046",
+      "createdAt": "2026-10-06T17:09:59.628Z",
+      "name": "Dana Whitfield",
+      "email": "dana.whitfield@cascadeguides.com",
+      "company": "Cascade Adventure Guides",
+      "role": "Head of Procurement",
+      "inquiryType": "Bulk / team order",
+      "message": "Hi — we run guided trips across BC and Washington and need to re-outfit about 60 guides with rain shells before our spring season starts in March. Can someone walk me through team pricing and lead times?",
+      "status": "claimed",
+      "route": "rep",
+      "score": "hot",
+      "summary": "Cascade Adventure Guides needs ~60 rain shells for their guides with a March season start, and Dana requested team pricing and lead times. The contact is Head of Procurement with purchase sign-off authority, making this a near-term, high-priority opportunity.",
+      "reasons": [
+        "Inquiry: 're-outfit about 60 guides' before spring season starts in March (explicit quantity and timeline).",
+        "Person lookup: Dana Whitfield is Head of Procurement and 'Signs off on equipment purchases' (has buying authority).",
+        "Company lookup: Runs guided outdoor tourism with ~60 seasonal field guides and estAnnualGearSpend $150K–$250K (organizational fit and budget capacity)."
+      ],
+      "cart": {
+        "items": [],
+        "total": 0
+      },
+      "draft": null,
+      "enrichment": {
+        "found": true,
+        "domain": "cascadeguides.com",
+        "emailType": "business",
+        "company": {
+          "name": "Cascade Adventure Guides",
+          "industry": "Guided outdoor tourism",
+          "employees": 240,
+          "hq": "Squamish, BC",
+          "description": "Runs guided hiking, climbing and backcountry ski trips across BC and Washington; ~60 seasonal field guides.",
+          "estAnnualGearSpend": "$150K–$250K",
+          "existingCustomer": false,
+          "priorOrders": 0
+        },
+        "person": {
+          "title": "Head of Procurement",
+          "seniority": "Director",
+          "buyingAuthority": "Signs off on equipment purchases"
+        }
+      },
+      "notes": [],
+      "timeline": [
+        {
+          "at": "2026-10-06T17:09:59.628Z",
+          "label": "Inquiry received from storefront"
+        },
+        {
+          "at": "2026-10-06T17:09:59.696Z",
+          "label": "Handed to n8n · test webhook (editor)"
+        },
+        {
+          "at": "2026-10-06T17:09:59.780Z",
+          "label": "n8n · Looked up company & role"
+        },
+        {
+          "at": "2026-10-06T17:10:06.446Z",
+          "label": "n8n · Cart check: empty"
+        },
+        {
+          "at": "2026-10-06T17:10:06.489Z",
+          "label": "n8n · Routed → Rep queue (call today)"
+        },
+        {
+          "at": "2026-10-06T17:10:58.936Z",
+          "label": "Claimed by You"
+        }
+      ],
+      "nextStep": "Call Dana within 24 hours to confirm shell specs, provide tiered team pricing and lead times, and request a PO to meet the March season start.",
+      "assignee": "You"
+    },
+    {
+      "id": "NF-1045",
+      "createdAt": "2026-10-06T17:05:32.336Z",
+      "name": "Marcus Lee",
+      "email": "marcus.lee@ridgewayschool.org",
+      "company": "Ridgeway Outdoor School",
+      "role": "Outdoor Program Director",
+      "inquiryType": "Bulk / team order",
+      "message": "We're outfitting our instructor team for the fall semester. I've started putting boots and packs in a cart but wanted to ask whether you offer volume or education pricing before we check out.",
+      "status": "sent",
+      "route": "approval",
+      "score": "hot",
+      "summary": "Marcus Lee (Outdoor Program Director) is preparing a bulk purchase to outfit his instructor team for the fall semester and asked about volume/education pricing. Ridgeway Outdoor School runs ~30 field instructors, is an existing customer, and Marcus owns the program equipment budget.",
+      "reasons": [
+        "Inquiry states a near-term need: 'outfitting our instructor team for the fall semester'.",
+        "High quantity potential: company lookup lists ~30 field instructors (exceeds 10-unit threshold).",
+        "Buying authority and history: person 'owns the program equipment budget' and Ridgeway is an existing customer with prior orders."
+      ],
+      "cart": {
+        "items": [
+          {
+            "id": "trailhead-boot",
+            "name": "Trailhead Waterproof Hiking Boot",
+            "category": "Footwear",
+            "price": 189,
+            "color": "#8a5a3b",
+            "icon": "boot",
+            "sizes": [
+              "8",
+              "8.5",
+              "9",
+              "9.5",
+              "10",
+              "10.5",
+              "11",
+              "9 Wide",
+              "9.5 Wide",
+              "10 Wide",
+              "10.5 Wide"
+            ],
+            "blurb": "Full-grain leather, Vibram outsole, available in Wide.",
+            "size": "10 Wide",
+            "qty": 12
+          },
+          {
+            "id": "basecamp-65",
+            "name": "Basecamp 65L Backpack",
+            "category": "Packs",
+            "price": 229,
+            "color": "#4f6b3a",
+            "icon": "pack",
+            "sizes": [
+              "S/M",
+              "M/L"
+            ],
+            "blurb": "Adjustable torso, hip-belt pockets, rain cover included.",
+            "size": "M/L",
+            "qty": 12
+          }
+        ],
+        "total": 5016
+      },
+      "draft": {
+        "subject": "Volume & education pricing for your cart at Ridgeway Outdoor School",
+        "body": "Hi Marcus — Thanks for checking in. Yes, we do offer volume and education pricing. I’ll confirm volume pricing for the items currently in your cart: 12 x Trailhead Waterproof Hiking Boot (size 10 Wide) and 12 x Basecamp 65L Backpack (size M/L). I’ll review your account and any education verification needed, then follow up with confirmed volume pricing and next steps. If you can reply with a preferred contact email or phone, I’ll prioritize this and get back to you quickly.\n\nSam Carter, Team Sales, Northfield Outfitters"
+      },
+      "enrichment": {
+        "found": true,
+        "domain": "ridgewayschool.org",
+        "emailType": "business",
+        "company": {
+          "name": "Ridgeway Outdoor School",
+          "industry": "Outdoor education",
+          "employees": 85,
+          "hq": "Bend, OR",
+          "description": "Semester-based outdoor leadership school; ~600 students a year, 30 field instructors.",
+          "estAnnualGearSpend": "$80K–$120K",
+          "existingCustomer": true,
+          "priorOrders": 2
+        },
+        "person": {
+          "title": "Outdoor Program Director",
+          "seniority": "Director",
+          "buyingAuthority": "Owns the program equipment budget"
+        }
+      },
+      "notes": [],
+      "timeline": [
+        {
+          "at": "2026-10-06T17:05:32.336Z",
+          "label": "Inquiry received from storefront"
+        },
+        {
+          "at": "2026-10-06T17:05:32.400Z",
+          "label": "Handed to n8n · test webhook (editor)"
+        },
+        {
+          "at": "2026-10-06T17:05:32.466Z",
+          "label": "n8n · Looked up company & role"
+        },
+        {
+          "at": "2026-10-06T17:05:43.181Z",
+          "label": "n8n · Cart check: 2 item(s), $5016"
+        },
+        {
+          "at": "2026-10-06T17:05:54.715Z",
+          "label": "n8n · Routed → AI drafted outreach, awaiting rep approval"
+        },
+        {
+          "at": "2026-10-06T17:06:23.331Z",
+          "label": "Rep approved & sent outreach email"
+        }
+      ],
+      "nextStep": "Send an education/volume pricing quote tailored to ~30 instructors, request sizes/quantities and required delivery date for fall, and include account/expedited-shipping options."
+    },
+    {
+      "id": "NF-1044",
+      "createdAt": "2026-10-06T17:02:36.561Z",
+      "name": "Marcus Lee",
+      "email": "marcus.lee@ridgewayschool.org",
+      "company": "Ridgeway Outdoor School",
+      "role": "Outdoor Program Director",
+      "inquiryType": "Bulk / team order",
+      "message": "We're outfitting our instructor team for the fall semester. I've started putting boots and packs in a cart but wanted to ask whether you offer volume or education pricing before we check out.",
+      "status": "researching",
+      "route": null,
+      "score": null,
+      "summary": null,
+      "reasons": [],
+      "cart": null,
+      "draft": null,
+      "enrichment": {
+        "found": true,
+        "domain": "ridgewayschool.org",
+        "emailType": "business",
+        "company": {
+          "name": "Ridgeway Outdoor School",
+          "industry": "Outdoor education",
+          "employees": 85,
+          "hq": "Bend, OR",
+          "description": "Semester-based outdoor leadership school; ~600 students a year, 30 field instructors.",
+          "estAnnualGearSpend": "$80K–$120K",
+          "existingCustomer": true,
+          "priorOrders": 2
+        },
+        "person": {
+          "title": "Outdoor Program Director",
+          "seniority": "Director",
+          "buyingAuthority": "Owns the program equipment budget"
+        }
+      },
+      "notes": [],
+      "timeline": [
+        {
+          "at": "2026-10-06T17:02:36.561Z",
+          "label": "Inquiry received from storefront"
+        },
+        {
+          "at": "2026-10-06T17:02:36.671Z",
+          "label": "Handed to n8n · test webhook (editor)"
+        },
+        {
+          "at": "2026-10-06T17:02:36.767Z",
+          "label": "n8n · Looked up company & role"
+        }
+      ]
+    },
+    {
+      "id": "NF-1043",
+      "createdAt": "2026-10-06T17:02:17.009Z",
+      "name": "Marcus Lee",
+      "email": "marcus.lee@ridgewayschool.org",
+      "company": "Ridgeway Outdoor School",
+      "role": "Outdoor Program Director",
+      "inquiryType": "Bulk / team order",
+      "message": "We're outfitting our instructor team for the fall semester. I've started putting boots and packs in a cart but wanted to ask whether you offer volume or education pricing before we check out.",
+      "status": "error",
+      "route": null,
+      "score": null,
+      "summary": null,
+      "reasons": [],
+      "cart": null,
+      "draft": null,
+      "enrichment": null,
+      "notes": [],
+      "timeline": [
+        {
+          "at": "2026-10-06T17:02:17.009Z",
+          "label": "Inquiry received from storefront"
+        },
+        {
+          "at": "2026-10-06T17:02:17.647Z",
+          "label": "Could not reach n8n — n8n responded 404: {\"code\":404,\"message\":\"The requested webhook \\\"northfield-inquiry\\\" is not registered.\",\"hint\":\"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works"
+        }
+      ],
+      "error": "n8n responded 404: {\"code\":404,\"message\":\"The requested webhook \\\"northfield-inquiry\\\" is not registered.\",\"hint\":\"Click the 'Execute workflow' button on the canvas, then try again. (In test mode, the webhook only works"
+    },
+    {
+      "id": "NF-1042",
+      "createdAt": "2026-09-24T17:13:56.420Z",
+      "name": "Marcus Lee",
+      "email": "marcus.lee@ridgewayschool.org",
+      "company": "Ridgeway Outdoor School",
+      "role": "Outdoor Program Director",
+      "inquiryType": "Bulk / team order",
+      "message": "We're outfitting our instructor team for the fall semester. I've started putting boots and packs in a cart but wanted to ask whether you offer volume or education pricing before we check out.",
+      "status": "sent",
+      "route": "approval",
+      "score": "hot",
+      "summary": "Director-level contact with budget is actively building a cart and asking about volume/education pricing to outfit instructors for the fall semester. The organization runs a semester-based program with ~30 field instructors and is an existing customer, indicating a near-term need for 10+ units.",
+      "reasons": [
+        "Contact explicitly asked about volume/education pricing and has started adding boots and packs to a cart (inquiry).",
+        "The person is the Outdoor Program Director and 'owns the program equipment budget' (lookup.person.buyingAuthority).",
+        "Ridgeway Outdoor School runs a semester-based program with ~30 field instructors and is an existing customer with prior orders (lookup.company), implying repeat, team-scale purchases. "
+      ],
+      "cart": {
+        "items": [
+          {
+            "id": "trailhead-boot",
+            "name": "Trailhead Waterproof Hiking Boot",
+            "category": "Footwear",
+            "price": 189,
+            "color": "#8a5a3b",
+            "icon": "boot",
+            "sizes": [
+              "8",
+              "8.5",
+              "9",
+              "9.5",
+              "10",
+              "10.5",
+              "11",
+              "9 Wide",
+              "9.5 Wide",
+              "10 Wide",
+              "10.5 Wide"
+            ],
+            "blurb": "Full-grain leather, Vibram outsole, available in Wide.",
+            "size": "10 Wide",
+            "qty": 12
+          },
+          {
+            "id": "basecamp-65",
+            "name": "Basecamp 65L Backpack",
+            "category": "Packs",
+            "price": 229,
+            "color": "#4f6b3a",
+            "icon": "pack",
+            "sizes": [
+              "S/M",
+              "M/L"
+            ],
+            "blurb": "Adjustable torso, hip-belt pockets, rain cover included.",
+            "size": "M/L",
+            "qty": 12
+          }
+        ],
+        "total": 5016
+      },
+      "draft": {
+        "subject": "Volume & education pricing for your cart",
+        "body": "Hi Marcus — thanks for the note. I can confirm we do offer volume and education pricing and I’ll confirm the exact volume pricing for the items you have in your cart:\n\n- 12 x Trailhead Waterproof Hiking Boot (size 10 Wide)\n- 12 x Basecamp 65L Backpack (size M/L)\n\nTo move forward I’ll verify education eligibility for Ridgeway Outdoor School and confirm the volume pricing for this order. Please let me know if you need more than the quantities above or if you prefer a formal quote or an updated cart total. I’ll follow up with the pricing and any documentation we need.\n\nShiki, Team Sales, Northfield Outfitters"
+      },
+      "enrichment": {
+        "found": true,
+        "domain": "ridgewayschool.org",
+        "emailType": "business",
+        "company": {
+          "name": "Ridgeway Outdoor School",
+          "industry": "Outdoor education",
+          "employees": 85,
+          "hq": "Bend, OR",
+          "description": "Semester-based outdoor leadership school; ~600 students a year, 30 field instructors.",
+          "estAnnualGearSpend": "$80K–$120K",
+          "existingCustomer": true,
+          "priorOrders": 2
+        },
+        "person": {
+          "title": "Outdoor Program Director",
+          "seniority": "Director",
+          "buyingAuthority": "Owns the program equipment budget"
+        }
+      },
+      "notes": [],
+      "timeline": [
+        {
+          "at": "2026-09-24T17:13:56.420Z",
+          "label": "Inquiry received from storefront"
+        },
+        {
+          "at": "2026-09-24T17:13:56.630Z",
+          "label": "Handed to n8n · test webhook (editor)"
+        },
+        {
+          "at": "2026-09-24T17:13:56.821Z",
+          "label": "n8n · Looked up company & role"
+        },
+        {
+          "at": "2026-09-24T17:14:10.590Z",
+          "label": "n8n · Cart check: 2 item(s), $5016"
+        },
+        {
+          "at": "2026-09-24T17:14:26.333Z",
+          "label": "n8n · Routed → AI drafted outreach, awaiting rep approval"
+        },
+        {
+          "at": "2026-09-24T17:14:51.651Z",
+          "label": "Rep approved & sent outreach email"
+        }
+      ],
+      "nextStep": "Send tailored education/volume pricing and a brief availability/lead-time quote; request sizes/quantities and offer a quick call to finalize fall delivery and terms."
+    }
+  ]
+}
